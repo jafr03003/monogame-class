@@ -1,0 +1,57 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+ 
+namespace monogameSprite
+{
+    public class Game1 : Game
+    {
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+ 
+        Sprite sprite1;
+        
+        public Game1()
+        {
+            _graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+            IsMouseVisible = true;
+        }
+ 
+        protected override void Initialize()
+        {
+            
+            base.Initialize();
+        }
+ 
+        protected override void LoadContent()
+        {
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+ 
+            
+            sprite1 = new Sprite(Content.Load<Texture2D>("xwing"), new Rectangle (150,250,100,100), new Vector2(150,250));
+ 
+            sprite1 = new Sprite(Content.Load<Texture2D>("mario"), new Rectangle (170,500,100,100), new Vector2(250,290));
+        }
+ 
+        protected override void Update(GameTime gameTime)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || 
+                    Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+ 
+            base.Update(gameTime);
+        }
+ 
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+ 
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(sprite1.Texture, sprite1.Rectangle, Color.White);
+            _spriteBatch.End();
+ 
+            base.Draw(gameTime);
+        }
+    }
+}
